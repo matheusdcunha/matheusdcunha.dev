@@ -9,6 +9,9 @@ resources/
 # Node
 node_modules/
 
+# Hugo-generated jsconfig (regenerated on build)
+assets/jsconfig.json
+
 # OS
 .DS_Store
 Thumbs.db
