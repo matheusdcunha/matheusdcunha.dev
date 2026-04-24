@@ -1,0 +1,33 @@
+{{ define "main" }}
+  <article>
+    <h1>Página não encontrada</h1>
+
+    <p class="lead">Parece que você chegou a uma página que não existe por aqui.</p>
+
+    <p class="font-bold">Algumas opções:</p>
+
+    <ul>
+      <li>Voltar para a <a href="{{ .Site.Home.RelPermalink }}">página inicial</a>.</li>
+      <li>
+        <a href="https://web.archive.org/web/*/{{ .Permalink | urlize }}"
+          >Ver se o Internet Archive tem uma cópia</a
+        >
+        caso esta página já tenha existido.
+      </li>
+      {{- with (where .Pages "Section" "posts" ) }}
+        <li>Conferir os <a href="{{ relURL "posts" }}">posts mais recentes</a>.</li>
+      {{- end }}
+    </ul>
+
+    {{- with site.Params.author }}
+      {{- $email := "" -}}
+      {{- if reflect.IsMap . -}}{{ $email = .email }}{{- end -}}
+      {{- with $email }}
+        <p>
+          Se chegou aqui por um link do site, se puder me
+          <a href="mailto:{{ . }}">enviar um e-mail</a> avisando eu agradeço.
+        </p>
+      {{- end }}
+    {{- end }}
+  </article>
+{{ end }}
