@@ -4,15 +4,19 @@ defaultContentLanguage = 'pt-br'
 title = 'Matheus da Cunha'
 copyright = 'Matheus da Cunha'
 enableRobotsTXT = true
+enableGitInfo = true
 
 [module]
   [[module.imports]]
     path = "github.com/michenriksen/hugo-theme-til"
 
 [outputs]
-  home = ['html']
+  home = ['html', 'rss']
   section = ['html', 'rss', 'json']
   page = ['html']
+
+[taxonomies]
+  tag = 'tags'
 
 [menus]
   [[menus.main]]
