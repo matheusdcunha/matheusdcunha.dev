@@ -1,0 +1,9 @@
+<figure>
+  <img
+    src="{{ .Destination | safeURL }}"
+    alt="{{ .PlainText }}"
+    {{- with .Title }} title="{{ . }}"{{ end }}
+    loading="lazy"
+    style="width: 100%; height: auto; display: block; margin: 0 auto;"
+  />
+</figure>
