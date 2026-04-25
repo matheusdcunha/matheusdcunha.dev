@@ -1,0 +1,24 @@
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-color: #fbf7ea;
+}
+
+.home-intro > :last-child {
+  margin-bottom: 1.5rem !important;
+}
+
+.home-divider {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.home-posts {
+  margin-top: 1.75rem !important;
+}
+
+.home-posts > div > ol {
+  margin-top: 0 !important;
+}
