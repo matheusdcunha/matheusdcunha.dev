@@ -40,7 +40,7 @@
 {{ end -}}
 {{ partial "opengraph.html" (dict "page" . "description" $description) }}
 {{ template "_internal/schema.html" . }}
-{{ template "_internal/twitter_cards.html" . }}
+{{ partial "twitter-cards.html" (dict "page" . "description" $description) }}
 <link rel="canonical" href="{{ .Permalink }}" />
 {{- range .AlternativeOutputFormats -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" />

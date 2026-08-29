@@ -3,6 +3,8 @@ date = '2026-08-28T20:17:00-03:00'
 draft = false
 title = 'Se você não escreve, você não sabe.'
 description = 'Escreva, escreva, aprenda!'
+featureImage = ''
+featureCaption = ''
 tags = ['conhecimento', 'pessoal']
 +++
 

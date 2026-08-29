@@ -1,0 +1,38 @@
+{{- /*
+  Retorna a imagem de capa da página, ou nil se não houver.
+
+  Prioridade:
+    1. page resource do bundle com "feature" ou "cover" no nome
+    2. param `featureImage`: URL remota (baixada no build) ou caminho em assets/
+
+  Uso: {{ $feature := partial "feature-image.html" . }}
+*/ -}}
+{{- $page := . -}}
+{{- $img := ($page.Resources.ByType "image").GetMatch "{*feature*,*cover*}" -}}
+
+{{- if not $img -}}
+  {{- with $page.Params.featureImage -}}
+    {{- if hasPrefix . "http" -}}
+      {{- with try (resources.GetRemote .) -}}
+        {{- with .Err -}}
+          {{- warnf "featureImage: falha ao baixar %q em %q: %s" $page.Params.featureImage $page.Path . -}}
+        {{- else -}}
+          {{- $img = .Value -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $img = resources.Get . -}}
+      {{- if not $img -}}
+        {{- warnf "featureImage: não encontrei %q em %q" $page.Params.featureImage $page.Path -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* .Width/.Height só existem em imagens; um content-type inesperado quebraria o build. */ -}}
+{{- if and $img (ne $img.ResourceType "image") -}}
+  {{- warnf "featureImage: %q não é uma imagem (%s) em %q" $img.RelPermalink $img.MediaType $page.Path -}}
+  {{- $img = false -}}
+{{- end -}}
+
+{{- return $img -}}

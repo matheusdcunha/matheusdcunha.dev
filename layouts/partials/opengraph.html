@@ -36,6 +36,16 @@
 {{- else }}
 <meta property="og:type" content="website">
 {{- end }}
-{{- range site.Params.images }}
+{{- $featured := partial "feature-image.html" $page -}}
+{{- with $featured }}
+<meta property="og:image" content="{{ .Permalink }}">
+<meta property="og:image:width" content="{{ .Width }}">
+<meta property="og:image:height" content="{{ .Height }}">
+  {{- with $page.Params.featureCaption }}
+<meta property="og:image:alt" content="{{ . | plainify }}">
+  {{- end }}
+{{- else }}
+  {{- range site.Params.images }}
 <meta property="og:image" content="{{ . | absURL }}">
+  {{- end }}
 {{- end }}

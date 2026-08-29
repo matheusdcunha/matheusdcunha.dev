@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{- $imgResources := .Resources.ByType "image" -}}
+  {{- $feature := partial "feature-image.html" . -}}
   <article class="main">
     <header>
       <h1 class="!mb-1">{{ .Title }}</h1>
@@ -14,15 +14,15 @@
         </div>
       {{- end }}
 
-      {{- with $imgResources.GetMatch "{*feature*,*cover*}" }}
+      {{- with $feature }}
         <figure class="feature-image !mb-20 block text-center">
           <img
             src="{{ .RelPermalink }}"
             width="{{ .Width }}"
             height="{{ .Height }}"
-            alt="{{ $.Params.FeatureCaption }}"
+            alt="{{ $.Params.featureCaption }}"
           />
-          {{- with $.Params.FeatureCaption }}
+          {{- with $.Params.featureCaption }}
             <figcaption class="text-xs italic">{{ . |  markdownify }}</figcaption>
           {{- end }}
         </figure>

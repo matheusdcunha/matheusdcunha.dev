@@ -1,0 +1,25 @@
+{{- /*
+  Substitui _internal/twitter_cards.html, que só enxerga page resources locais
+  e por isso ignora capas vindas de `featureImage` (URL remota ou assets/).
+*/ -}}
+{{- $page := .page -}}
+{{- $description := .description -}}
+{{- $featured := partial "feature-image.html" $page -}}
+{{- with $featured }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ .Permalink }}">
+  {{- with $page.Params.featureCaption }}
+<meta name="twitter:image:alt" content="{{ . | plainify }}">
+  {{- end }}
+{{- else }}
+  {{- with site.Params.images }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ index . 0 | absURL }}">
+  {{- else }}
+<meta name="twitter:card" content="summary">
+  {{- end }}
+{{- end }}
+<meta name="twitter:title" content="{{ $page.Title }}">
+{{- with $description }}
+<meta name="twitter:description" content="{{ . }}">
+{{- end }}
